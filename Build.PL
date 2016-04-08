@@ -32,9 +32,9 @@ my $builder = Module::Build->new(
     },
     requires => {
         'Glib::Object::Introspection' => "0.016",
-        'Cairo'    => 0,
-        'Carp'     => 0,
-        'Exporter' => 0,
+        #'Cairo'    => 0,
+        #'Carp'     => 0,
+        #'Exporter' => 0,
     },
     meta_merge => {
         resources => {
