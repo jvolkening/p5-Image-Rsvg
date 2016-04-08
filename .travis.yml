@@ -14,3 +14,6 @@ addons:
     - ubuntu-toolchain-r-test
     packages:
     - librsvg2-2
+    - libcairo2
+    - libglib2.0-0
+    - gobject-introspection
