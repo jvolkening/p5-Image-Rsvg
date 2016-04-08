@@ -18,4 +18,4 @@ addons:
     packages:
     - librsvg2-2
     - gobject-introspection
- 	- libgirepository1.0-dev
+    - libgirepository1.0-dev
