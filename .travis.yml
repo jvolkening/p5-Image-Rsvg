@@ -8,3 +8,9 @@ perl:
   - "5.12"
 os:
   - linux
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - librsvg2-2
