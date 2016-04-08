@@ -8,6 +8,8 @@ perl:
   - "5.12"
 os:
   - linux
+install:
+  - cpanm --verbose --installdeps --no-interactive --notest .
 addons:
   apt:
     sources:
