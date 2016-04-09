@@ -1,0 +1,50 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use Getopt::Long;
+
+use Cairo;
+use Cairo::GObject; # don't forget this if you're using Cairo
+use Image::Rsvg;
+
+my $w_ask;
+my $h_ask;
+my $bg;
+
+GetOptions(
+    'width=i'  => \$w_ask,
+    'height=i' => \$h_ask,
+) or die "Error parsing input options: $@\n";
+
+# read in SVG data from STDIN
+my $h = Image::Rsvg::Handle->new();
+$h->write($_) while (<STDIN>);
+$h->close;
+
+
+# determine output dimensions
+my $dim = $h->get_dimensions;
+my $w_out = $dim->{width};
+my $h_out = $dim->{height};
+my $ratio = $w_out/$h_out;
+
+if (defined $w_ask) {
+    $w_out = $w_ask;
+    $h_out = $h_ask // $w_out/$ratio;
+}
+elsif (defined $h_ask) {
+    $h_out = $h_ask;
+    $w_out = $h_out * $ratio;
+}
+
+# write PNG to STDOUT
+my $surf = Cairo::ImageSurface->create( 'argb32', $w_out, $h_out );
+my $cr = Cairo::Context->create($surf);
+$cr->scale( $w_out/$dim->{width}, $h_out/$dim->{height} );
+$h->render_cairo($cr);
+binmode STDOUT;
+$surf->write_to_png_stream( sub { print $_[1] } );
+
+exit;
