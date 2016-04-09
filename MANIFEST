@@ -8,3 +8,4 @@ share/Rsvg-2.0.typelib
 t/Perl_Onion.svg
 t/Perl_Onion_LICENSE
 t/rsvg.t
+demo/svg2png
